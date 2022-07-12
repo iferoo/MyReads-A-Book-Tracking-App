@@ -9,10 +9,8 @@ export default function SearchBooks({ books, changeShelf }) {
 
   const getBooks = event => {
     const category = event.target.value;
-
-    if (category) {
+    if (category.length > 0) {
       search(category.trim(), 20).then(books => {
-        console.log(books);
         if (books.length > 0) {
           setNewBooks(books);
           setNotFound(false);
@@ -21,6 +19,9 @@ export default function SearchBooks({ books, changeShelf }) {
           setNotFound(true);
         }
       });
+    } else {
+      setNewBooks([]);
+      setNotFound(false);
     }
   };
   return (
